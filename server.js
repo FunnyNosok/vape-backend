@@ -95,7 +95,15 @@ app.post('/api/orders', async (req, res) => {
         const resp = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ chat_id: COURIERS_CHAT_ID, text })
+          body: JSON.stringify({
+            chat_id: COURIERS_CHAT_ID,
+            text,
+            reply_markup: {
+              inline_keyboard: [[
+                { text: 'Взять заказ', callback_data: `take_${order.id}` }
+              ]]
+            }
+          })
         });
         const data = await resp.json();
         if (!data.ok) {
