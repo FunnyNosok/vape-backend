@@ -11,7 +11,7 @@ const ORDERS_FILE = path.join(__dirname, 'orders.json');
 
 // --- Telegram Bot ---
 const TELEGRAM_BOT_TOKEN = '8099602574:AAEZBBLDADQwXVAxovwHQSkx_KfiUqgDGg4';
-const COURIERS_CHAT_ID = '4924605396';
+const COURIERS_CHAT_ID = '-1002598612354';
 
 app.use(cors());
 app.use(express.json());
