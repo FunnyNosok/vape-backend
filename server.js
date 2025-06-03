@@ -90,13 +90,22 @@ app.post('/api/orders', async (req, res) => {
       if (err2) return res.status(500).json({ error: 'Ошибка записи файла' });
       // --- Отправка в Telegram ---
       try {
+        console.log('Пробую отправить сообщение в Telegram...');
         const text = `🆕 Новый заказ!\nИмя: ${order.name}\nТелефон: ${order.phone}\nTelegram: ${order.user_tg}\nМесто: ${order.place}\nДата: ${order.date}\nВремя: ${order.time}\nТовары: ${(order.items||[]).map(i=>`${i.name} × ${i.qty}`).join(', ')}\nКомментарий: ${order.comment || '-'}`;
-        await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+        const resp = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ chat_id: COURIERS_CHAT_ID, text })
         });
-      } catch (e) { /* ignore */ }
+        const data = await resp.json();
+        if (!data.ok) {
+          console.error('Ошибка Telegram:', data);
+        } else {
+          console.log('Успешно отправлено в Telegram:', data);
+        }
+      } catch (e) {
+        console.error('Ошибка Telegram:', e);
+      }
       res.json({ success: true });
     });
   });
