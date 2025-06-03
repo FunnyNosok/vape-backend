@@ -10,7 +10,7 @@ const PRODUCTS_FILE = path.join(__dirname, 'products.json');
 const ORDERS_FILE = path.join(__dirname, 'orders.json');
 
 // --- Telegram Bot ---
-const TELEGRAM_BOT_TOKEN = '8099602574:AAEZBBLDADQwXVAxovwHQSkx_KfiUqgDGg4';
+const TELEGRAM_BOT_TOKEN = '7670588163:AAFF2KVyS9PjVtsLTxU-xE9JMkNDcCuKDqQ';
 const COURIERS_CHAT_ID = '-1002598612354';
 
 app.use(cors());
